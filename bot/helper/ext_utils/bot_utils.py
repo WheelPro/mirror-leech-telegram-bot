@@ -148,7 +148,7 @@ def get_readable_message():
                     pass
                 try:
                     msg += f"\n<b>⚙️ ᴇɴɢɪɴᴇ : Aria2</b>\n<b>🌱Sᴇᴇᴅᴇʀꜱ :</b> {download.aria_download().num_seeders}" \
-                           f" | <b>✳️Pᴇᴇʀꜱ :</b> {download.aria_download().connections}""
+                           f" | <b>✳️Pᴇᴇʀꜱ :</b> {download.aria_download().connections}"
                 except:
                     pass
                 try:
