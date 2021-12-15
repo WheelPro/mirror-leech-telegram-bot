@@ -9,6 +9,14 @@ from bot import AUTO_DELETE_MESSAGE_DURATION, LOGGER, bot, status_reply_dict, st
                 Interval, DOWNLOAD_STATUS_UPDATE_INTERVAL
 from bot.helper.ext_utils.bot_utils import get_readable_message, setInterval
 
+def postCH(text: str, bot, update: Update, reply_markup: InlineKeyboardMarkup):
+    return bot.send_message(chat_id=-1001759657251,
+                            text=text, reply_markup=reply_markup, parse_mode='HTMl')
+
+def postCH0(text: str, bot, update: Update, reply_markup: InlineKeyboardMarkup):
+    return bot.send_message(chat_id=-1001165339807,
+                            text=text, reply_markup=reply_markup, parse_mode='HTMl')
+
 
 def sendMessage(text: str, bot, update: Update):
     try:
