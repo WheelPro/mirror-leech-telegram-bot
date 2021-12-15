@@ -82,12 +82,14 @@ def cloneNode(update, context):
         else:
             uname = f'<a href="tg://user?id={update.message.from_user.id}">{update.message.from_user.first_name}</a>'
         if uname is not None:
-            cc = f'\n\n<b>cc: </b>{uname}'
+            cc = f'\n\n<b>👤by : </b>{uname}'
             men = f'{uname} '
         if button in ["cancelled", ""]:
             sendMessage(men + result, context.bot, update)
+            postCH(men + result, context.bot, update)
         else:
             sendMarkup(result + cc, context.bot, update, button)
+            postCH(result + cc, context.bot, update, button)
         if gdtot_link:
             gd.deletefile(link)
     else:
