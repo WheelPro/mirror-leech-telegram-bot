@@ -254,14 +254,14 @@ class MirrorListener(listeners.MirrorListeners):
                 return
 
         with download_dict_lock:
-            msg = f'<b>Name: </b><code>{download_dict[self.uid].name()}</code>\n\n<b>Size: </b>{size}'
-            msg += f'\n\n<b>Type: </b>{typ}'
+            msg = f'<b>📂Fɪʟᴇɴᴀᴍᴇ: </b><code>{download_dict[self.uid].name()}</code>\n\n<b>📦Sɪᴢᴇ: </b>{size}'
+            msg += f''
             if os.path.isdir(f'{DOWNLOAD_DIR}/{self.uid}/{download_dict[self.uid].name()}'):
-                msg += f'\n<b>SubFolders: </b>{folders}'
-                msg += f'\n<b>Files: </b>{files}'
+                msg += f'\n<b>📚Sᴜʙꜰᴏʟᴅᴇʀꜱ: </b>{folders}'
+                msg += f'\n<b>📁Fɪʟᴇꜱ: </b>{files}'
             buttons = button_build.ButtonMaker()
             link = short_url(link)
-            buttons.buildbutton("☁️ Drive Link", link)
+            buttons.buildbutton("☁️ Dʀɪᴠᴇ Lɪɴᴋ ☁️", link)
             LOGGER.info(f'Done Uploading {download_dict[self.uid].name()}')
             if INDEX_URL is not None:
                 url_path = requests.utils.quote(f'{download_dict[self.uid].name()}')
@@ -269,14 +269,14 @@ class MirrorListener(listeners.MirrorListeners):
                 if os.path.isdir(f'{DOWNLOAD_DIR}/{self.uid}/{download_dict[self.uid].name()}'):
                     share_url += '/'
                     share_url = short_url(share_url)
-                    buttons.buildbutton("⚡ Index Link", share_url)
+                    buttons.buildbutton("⚡ Iɴᴅᴇx Lɪɴᴋ ⚡", share_url)
                 else:
                     share_url = short_url(share_url)
-                    buttons.buildbutton("⚡ Index Link", share_url)
+                    buttons.buildbutton("⚡ Iɴᴅᴇx Lɪɴᴋ ⚡", share_url)
                     if VIEW_LINK:
                         share_urls = f'{INDEX_URL}/{url_path}?a=view'
                         share_urls = short_url(share_urls)
-                        buttons.buildbutton("🌐 View Link", share_urls)
+                        buttons.buildbutton("📖 Vɪᴇᴡ Lɪɴᴋ 📖", share_urls)
             if BUTTON_FOUR_NAME is not None and BUTTON_FOUR_URL is not None:
                 buttons.buildbutton(f"{BUTTON_FOUR_NAME}", f"{BUTTON_FOUR_URL}")
             if BUTTON_FIVE_NAME is not None and BUTTON_FIVE_URL is not None:
@@ -288,9 +288,10 @@ class MirrorListener(listeners.MirrorListeners):
             else:
                 uname = f'<a href="tg://user?id={self.message.from_user.id}">{self.message.from_user.first_name}</a>'
             if uname is not None:
-                msg += f'\n\n<b>cc: </b>{uname}'
+                msg += f'\n<b>👤by: </b>{uname}'
 
         sendMarkup(msg, self.bot, self.update, InlineKeyboardMarkup(buttons.build_menu(2)))
+        postCH(msg, self.bot, self.update, InlineKeyboardMarkup(buttons.build_menu(2)))
         if self.isQbit and QB_SEED:
             return
         else:
