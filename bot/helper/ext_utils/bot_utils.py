@@ -143,27 +143,17 @@ def get_readable_message():
                     msg += f"\n<b>📥Dᴏᴡɴʟᴏᴀᴅᴇᴅ :</b> {get_readable_file_size(download.processed_bytes())} of {download.size()}"
                 msg += f"\n<b>⚡️Sᴘᴇᴇᴅ :</b> {download.speed()} | <b>⏲️Eᴛᴀ :</b> {download.eta()}"
                 try:
-                    msg += f"\n<b>👥 ᴜꜱᴇʀ :</b> <b>{download.message.from_user.first_name}</b>"
+                    msg += f"\n<b>👤ᴜꜱᴇʀ :</b> <b>{download.message.from_user.first_name}</b>"
                 except:
                     pass
                 try:
-                    msg += f"\n<b>⚙️ ᴇɴɢɪɴᴇ : Aria2</b>\n<b>🌱Sᴇᴇᴅᴇʀꜱ :</b> {download.aria_download().num_seeders}" \
+                    msg += f"\n<b>⚙️ᴇɴɢɪɴᴇ : Aria2</b>\n<b>🌱Sᴇᴇᴅᴇʀꜱ :</b> {download.aria_download().num_seeders}" \
                            f" | <b>✳️Pᴇᴇʀꜱ :</b> {download.aria_download().connections}"
-                except:
-                    pass
-                try:
-                    msg += f"\n<b>🌱 ꜱᴇᴇᴅᴇʀꜱ :</b> <code>{download.aria_download().num_seeders}</code>" \
-                            f"\n<b>✳️ ᴘᴇᴇʀꜱ :</b> <code>{download.aria_download().connections}</code>"
-                except:
-                    pass
-                try:
-                    msg += f"\n<b>🌱 ꜱᴇᴇᴅᴇʀꜱ :</b> <code>{download.torrent_info().num_seeds}</code>" \
-                           f" | <b>🧲 ʟᴇᴇᴄʜᴇʀꜱ :</b> <code>{download.torrent_info().num_leechs}</code>"
                 except:
                     pass    
                 try:
-                    msg += f"\n<b>⚙️ ᴇɴɢɪɴᴇ : Qbit</b>\n<b>🌱 ꜱᴇᴇᴅᴇʀꜱ :</b> <code>{download.torrent_info().num_seeds}</code>" \
-                           f" | <b>🧲 ʟᴇᴇᴄʜᴇʀꜱ :</b> <code>{download.torrent_info().num_leechs}</code>"
+                    msg += f"\n<b>⚙️ᴇɴɢɪɴᴇ : Qbit</b>\n<b>🌱 ꜱᴇᴇᴅᴇʀꜱ :</b> <code>{download.torrent_info().num_seeds}</code>" \
+                           f" | <b>🧲ʟᴇᴇᴄʜᴇʀꜱ :</b> <code>{download.torrent_info().num_leechs}</code>"
                 except:
                     pass
                 msg += f"\n<b>⛔Tᴏ Sᴛᴏᴘ :</b> <code>/{BotCommands.CancelMirror} {download.gid()}</code>"
