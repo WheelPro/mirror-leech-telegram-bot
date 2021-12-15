@@ -143,23 +143,37 @@ def get_readable_message():
                     msg += f"\n<b>📥Dᴏᴡɴʟᴏᴀᴅᴇᴅ :</b> {get_readable_file_size(download.processed_bytes())} of {download.size()}"
                 msg += f"\n<b>⚡️Sᴘᴇᴇᴅ :</b> {download.speed()} | <b>⏲️Eᴛᴀ :</b> {download.eta()}"
                 try:
-                    msg += f"\n<b>🌱Sᴇᴇᴅᴇʀꜱ :</b> {download.aria_download().num_seeders}" \
-                           f" | <b>✳️Pᴇᴇʀꜱ :</b> {download.aria_download().connections}"
+                    msg += f"\n<b>👥 ᴜꜱᴇʀ :</b> <b>{download.message.from_user.first_name}</b>"
                 except:
                     pass
                 try:
-                    msg += f"\n<b>🌱Sᴇᴇᴅᴇʀꜱ :</b> {download.torrent_info().num_seeds}" \
-                           f" | <b>🧲Lᴇᴇᴄʜᴇʀꜱ :</b> {download.torrent_info().num_leechs}"
+                    msg += f"\n<b>⚙️ ᴇɴɢɪɴᴇ : Aria2</b>\n<b>🌱Sᴇᴇᴅᴇʀꜱ :</b> {download.aria_download().num_seeders}" \
+                           f" | <b>✳️Pᴇᴇʀꜱ :</b> {download.aria_download().connections}""
                 except:
                     pass
-                msg += f"\n⛔Tᴏ Sᴛᴏᴘ :<code>/{BotCommands.CancelMirror} {download.gid()}</code>"
+                try:
+                    msg += f"\n<b>🌱 ꜱᴇᴇᴅᴇʀꜱ :</b> <code>{download.aria_download().num_seeders}</code>" \
+                            f"\n<b>✳️ ᴘᴇᴇʀꜱ :</b> <code>{download.aria_download().connections}</code>"
+                except:
+                    pass
+                try:
+                    msg += f"\n<b>🌱 ꜱᴇᴇᴅᴇʀꜱ :</b> <code>{download.torrent_info().num_seeds}</code>" \
+                           f" | <b>🧲 ʟᴇᴇᴄʜᴇʀꜱ :</b> <code>{download.torrent_info().num_leechs}</code>"
+                except:
+                    pass    
+                try:
+                    msg += f"\n<b>⚙️ ᴇɴɢɪɴᴇ : Qbit</b>\n<b>🌱 ꜱᴇᴇᴅᴇʀꜱ :</b> <code>{download.torrent_info().num_seeds}</code>" \
+                           f" | <b>🧲 ʟᴇᴇᴄʜᴇʀꜱ :</b> <code>{download.torrent_info().num_leechs}</code>"
+                except:
+                    pass
+                msg += f"\n<b>⛔Tᴏ Sᴛᴏᴘ :</b> <code>/{BotCommands.CancelMirror} {download.gid()}</code>"
             elif download.status() == MirrorStatus.STATUS_SEEDING:
                 msg += f"\n<b>Size: </b>{download.size()}"
                 msg += f"\n<b>Speed: </b>{get_readable_file_size(download.torrent_info().upspeed)}/s"
                 msg += f" | <b>Uploaded: </b>{get_readable_file_size(download.torrent_info().uploaded)}"
                 msg += f"\n<b>Ratio: </b>{round(download.torrent_info().ratio, 3)}"
                 msg += f" | <b>Time: </b>{get_readable_time(download.torrent_info().seeding_time)}"
-                msg += f"\n⛔Tᴏ Sᴛᴏᴘ :<code>/{BotCommands.CancelMirror} {download.gid()}</code>"
+                msg += f"\n<b>⛔Tᴏ Sᴛᴏᴘ :</b> <code>/{BotCommands.CancelMirror} {download.gid()}</code>"
             else:
                 msg += f"\n<b>Size: </b>{download.size()}"
             msg += "\n\n"
