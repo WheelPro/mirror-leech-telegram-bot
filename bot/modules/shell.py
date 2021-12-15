@@ -18,7 +18,7 @@ def shell(update, context):
     stderr = process.stderr.decode('utf-8')
     stdout = process.stdout.decode('utf-8')
     if len(stdout) != 0:
-        reply += f"*Stdout*\n<code>{stdout}</code>\n"
+        reply += f"<code>{stdout}</code>\n"
         LOGGER.info(f"Shell - {cmd} - {stdout}")
     if len(stderr) != 0:
         reply += f"*Stderr*\n<code>{stderr}</code>\n"
