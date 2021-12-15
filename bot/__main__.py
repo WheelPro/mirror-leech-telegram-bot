@@ -23,7 +23,6 @@ from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clon
 
 
 def stats(update, context):
-    global main
     currentTime = get_readable_time(time.time() - botStartTime)
     total, used, free = shutil.disk_usage('.')
     total = get_readable_file_size(total)
@@ -32,44 +31,22 @@ def stats(update, context):
     sent = get_readable_file_size(psutil.net_io_counters().bytes_sent)
     recv = get_readable_file_size(psutil.net_io_counters().bytes_recv)
     cpuUsage = psutil.cpu_percent(interval=0.5)
+    memory = psutil.virtual_memory().percent
     disk = psutil.disk_usage('/').percent
-    p_core = psutil.cpu_count(logical=False)
-    t_core = psutil.cpu_count(logical=True)
-    swap = psutil.swap_memory()
-    swap_p = swap.percent
-    swap_t = get_readable_file_size(swap.total)
-    swap_u = get_readable_file_size(swap.used)
-    memory = psutil.virtual_memory()
-    mem_p = memory.percent
-    mem_t = get_readable_file_size(memory.total)
-    mem_a = get_readable_file_size(memory.available)
-    mem_u = get_readable_file_size(memory.used)
-    stats = f'▶ 𝖱𝖴𝖭𝖭𝖨𝖭𝖦 𝖲𝖨𝖭𝖢𝖤 ▶ : {currentTime}\n' \
-            f'<b>𝖣𝖨𝖲𝖪 𝖨𝖭𝖥𝖮</b>\n' \
-            f'<b>ᴛᴏᴛᴀʟ</b> : {total}\n' \
-            f'<b>ᴜꜱᴇᴅ</b> : {used} ~ ' \
-            f'<b>ꜰʀᴇᴇ</b> : {free}\n\n' \
-            f'<b>𝖣𝖠𝖳𝖠 𝖴𝖲𝖠𝖦𝖤</b>\n' \
-            f'<b>ᴜʟ</b> : {sent} ~ ' \
-            f'<b>ᴅʟ</b> : {recv}\n\n' \
-            f'<b>𝖲𝖤𝖱𝖵𝖤𝖱 𝖲𝖳𝖠𝖳𝖲</b>\n' \
-            f'<b>ᴄᴘᴜ</b> : {cpuUsage}%\n' \
-            f'<b>ʀᴀᴍ</b> : {memory}%\n' \
-            f'<b>ᴅɪꜱᴋ</b> : {disk}%\n\n' \
-            f'<b>𝖢𝖮𝖱𝖤𝖲</b>\n' \
-            f'<b>ᴘʜʏꜱɪᴄᴀʟ ᴄᴏʀᴇꜱ</b> : {p_core}\n' \
-            f'<b>ᴛᴏᴛᴀʟ ᴄᴏʀᴇꜱ</b> : {t_core}\n\n' \
-            f'<b>𝖲𝖶𝖠𝖯</b>\n' \
-            f'<b>ꜱᴡᴀᴘ</b> : {swap_t}\n' \
-            f'<b>ᴜꜱᴇᴅ</b> : {swap_p}\n\n' \
-            f'<b>𝖬𝖤𝖬𝖮𝖱𝖸</b>\n' \
-            f'<b>ᴍᴇᴍᴏʀʏ ᴛᴏᴛᴀʟ</b> : {mem_t}\n' \
-            f'<b>ᴍᴇᴍᴏʀʏ ꜰʀᴇᴇ</b> : {mem_a}\n' \
-            f'<b>ᴍᴇᴍᴏʀʏ ᴜꜱᴇᴅ</b> : {mem_u}\n'         
-    keyboard = [[InlineKeyboardButton("CLOSE", callback_data="stats_close")]]
-    main = sendMarkup(stats, context.bot, update, reply_markup=InlineKeyboardMarkup(keyboard))
-
-
+    stats = f'<b>╭──《🌐 Bᴏᴛ Sᴛᴀᴛɪsᴛɪᴄs 🌐》</b>\n' \
+            f'<b>│</b>\n' \
+            f'<b>├  ▶ Rᴜɴɴɪɴɢ Sɪɴᴄᴇ ▶ : {currentTime}</b>\n' \
+            f'<b>├  💾 Tᴏᴛᴀʟ Dɪsᴋ Sᴘᴀᴄᴇ : {total}</b>\n' \
+            f'<b>├  📀 Tᴏᴛᴀʟ Usᴇᴅ Sᴘᴀᴄᴇ : {used}</b>\n' \
+            f'<b>├  💿 Tᴏᴛᴀʟ Fʀᴇᴇ Sᴘᴀᴄᴇ : {free}</b>\n' \
+            f'<b>├  🔼 Tᴏᴛᴀʟ Uᴘʟᴏᴀᴅ : {sent}</b>\n' \
+            f'<b>├  🔽 Tᴏᴛᴀʟ Dᴏᴡɴʟᴏᴀᴅ : {recv}</b>\n' \
+            f'<b>├  🖥️ Cᴘᴜ : {cpuUsage}%</b>\n' \
+            f'<b>├  🎮 Rᴀᴍ : {memory}%</b>\n' \
+            f'<b>├  💽 Dɪsᴋ : {disk}%</b>\n' \
+            f'<b>│</b>\n' \
+            f'<b>╰──《 ☣️ @silvercloudxd ☣️ 》</b>'
+    update.effective_message.reply_photo("https://i.ibb.co/qWX64Bb/Screenshot-20210730-170406210-1-digital-art-x4.jpg", stats, parse_mode=ParseMode.HTML)
 
 def start(update, context):
     buttons = button_build.ButtonMaker()
@@ -91,7 +68,7 @@ Type /{BotCommands.HelpCommand} to get a list of available commands in group!
         )
 
 def restart(update, context):
-    restart_message = sendMessage("Restarting...", context.bot, update)
+    restart_message = sendMessage("Restarting, Ruko Zara Sabar Karo✋🏻", context.bot, update)
     if Interval:
         Interval[0].cancel()
     alive.kill()
@@ -111,7 +88,7 @@ def restart(update, context):
 
 def ping(update, context):
     start_time = int(round(time.time() * 1000))
-    reply = sendMessage("Starting Ping", context.bot, update)
+    reply = sendMessage("⛔Starting Ping", context.bot, update)
     end_time = int(round(time.time() * 1000))
     editMessage(f'{end_time - start_time} ms', reply)
 
