@@ -23,6 +23,7 @@ from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clon
 
 
 def stats(update, context):
+    global main
     currentTime = get_readable_time(time.time() - botStartTime)
     total, used, free = shutil.disk_usage('.')
     total = get_readable_file_size(total)
@@ -43,21 +44,31 @@ def stats(update, context):
     mem_t = get_readable_file_size(memory.total)
     mem_a = get_readable_file_size(memory.available)
     mem_u = get_readable_file_size(memory.used)
-    stats = f'<b>Bot Uptime:</b> {currentTime}\n\n'\
-            f'<b>Total Disk Space:</b> {total}\n'\
-            f'<b>Used:</b> {used} | <b>Free:</b> {free}\n\n'\
-            f'<b>Upload:</b> {sent}\n'\
-            f'<b>Download:</b> {recv}\n\n'\
-            f'<b>CPU:</b> {cpuUsage}%\n'\
-            f'<b>RAM:</b> {mem_p}%\n'\
-            f'<b>DISK:</b> {disk}%\n\n'\
-            f'<b>Physical Cores:</b> {p_core}\n'\
-            f'<b>Total Cores:</b> {t_core}\n\n'\
-            f'<b>SWAP:</b> {swap_t} | <b>Used:</b> {swap_p}%\n'\
-            f'<b>Memory Total:</b> {mem_t}\n'\
-            f'<b>Memory Free:</b> {mem_a}\n'\
-            f'<b>Memory Used:</b> {mem_u}\n'
-    sendMessage(stats, context.bot, update)
+    stats = f'▶ 𝖱𝖴𝖭𝖭𝖨𝖭𝖦 𝖲𝖨𝖭𝖢𝖤 ▶ : {currentTime}\n' \
+            f'<b>𝖣𝖨𝖲𝖪 𝖨𝖭𝖥𝖮</b>\n' \
+            f'<b>ᴛᴏᴛᴀʟ</b> : {total}\n' \
+            f'<b>ᴜꜱᴇᴅ</b> : {used} ~ ' \
+            f'<b>ꜰʀᴇᴇ</b> : {free}\n\n' \
+            f'<b>𝖣𝖠𝖳𝖠 𝖴𝖲𝖠𝖦𝖤</b>\n' \
+            f'<b>ᴜʟ</b> : {sent} ~ ' \
+            f'<b>ᴅʟ</b> : {recv}\n\n' \
+            f'<b>𝖲𝖤𝖱𝖵𝖤𝖱 𝖲𝖳𝖠𝖳𝖲</b>\n' \
+            f'<b>ᴄᴘᴜ</b> : {cpuUsage}%\n' \
+            f'<b>ʀᴀᴍ</b> : {memory}%\n' \
+            f'<b>ᴅɪꜱᴋ</b> : {disk}%\n\n' \
+            f'<b>𝖢𝖮𝖱𝖤𝖲</b>\n' \
+            f'<b>ᴘʜʏꜱɪᴄᴀʟ ᴄᴏʀᴇꜱ</b> : {p_core}\n' \
+            f'<b>ᴛᴏᴛᴀʟ ᴄᴏʀᴇꜱ</b> : {t_core}\n\n' \
+            f'<b>𝖲𝖶𝖠𝖯</b>\n' \
+            f'<b>ꜱᴡᴀᴘ</b> : {swap_t}\n' \
+            f'<b>ᴜꜱᴇᴅ</b> : {swap_p}\n\n' \
+            f'<b>𝖬𝖤𝖬𝖮𝖱𝖸</b>\n' \
+            f'<b>ᴍᴇᴍᴏʀʏ ᴛᴏᴛᴀʟ</b> : {mem_t}\n' \
+            f'<b>ᴍᴇᴍᴏʀʏ ꜰʀᴇᴇ</b> : {mem_a}\n' \
+            f'<b>ᴍᴇᴍᴏʀʏ ᴜꜱᴇᴅ</b> : {mem_u}\n'         
+    keyboard = [[InlineKeyboardButton("CLOSE", callback_data="stats_close")]]
+    main = sendMarkup(stats, context.bot, update, reply_markup=InlineKeyboardMarkup(keyboard))
+
 
 
 def start(update, context):
