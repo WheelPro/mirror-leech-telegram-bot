@@ -39,6 +39,8 @@ class _BotCommands:
         self.QbUnzipLeechCommand = 'qbunzipleech7'
         self.QbZipLeechCommand = 'qbzipleech7'
         self.LeechWatchCommand = 'leechwatch7'
+        self.RssHelpCommand = 'rsshelp'
+        self.UsageCommand = 'usage'
         self.LeechZipWatchCommand = 'leechzipwatch7'
 
 BotCommands = _BotCommands()
