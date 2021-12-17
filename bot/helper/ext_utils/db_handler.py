@@ -4,7 +4,7 @@ from bot import AUTHORIZED_CHATS, SUDO_USERS, DB_URI, LOGGER
 
 rss_dict = {}
 
-class DbManager:
+class DbManger:
     def __init__(self):
         self.err = False
 
@@ -130,4 +130,4 @@ class DbManager:
 
         for row in self.load_all():
             rss_dict[row[0]] = (row[1], row[2], row[3])
-postgres = DbManager()
+postgres = DbManger()
