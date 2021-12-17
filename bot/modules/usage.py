@@ -9,7 +9,7 @@ from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.filters import CustomFilters
 from bot.helper.telegram_helper.message_utils import sendMessage
 from telegram import update
-from telegram.ext import CommandHandler
+from telegram.ext import Callback CommandHandler
 
 
 def usage(update, context):
