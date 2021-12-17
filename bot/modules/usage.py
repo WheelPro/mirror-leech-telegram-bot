@@ -7,12 +7,12 @@ import heroku3
 from bot import dispatcher, HEROKU_APP_NAME, HEROKU_API_KEY
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.filters import CustomFilters
-from bot.helper.telegram_helper.message_utils import sendMessage
+from bot.helper.telegram_helper.message_utils import *
 from telegram import update
 from telegram.ext import Callback, CommandHandler
 
 
-def usage(update, context):
+def usage(text: str, bot, update: Update, reply_markup: InlineKeyboardMarkup):
     heroku_api = "https://api.heroku.com"
     if HEROKU_API_KEY is not None and HEROKU_APP_NAME is not None:
         Heroku = heroku3.from_key(HEROKU_API_KEY)
@@ -67,8 +67,7 @@ def usage(update, context):
                 f"• <code>{AppHours}</code> <b>Hours and</b> <code>{AppMinutes}</code> <b>Minutes - {AppPercent}%</b>\n\n"
                 "<b>Dyno Remaining this month :</b>\n"
                 f"• <code>{hours}</code> <b>Hours and</b> <code>{minutes}</code> <b>Minutes - {quota_percent}%</b>",
-                context.bot,
-                update
+                text: str, bot, update: Update, reply_markup: InlineKeyboardMarkup)
             )
             return True
 
