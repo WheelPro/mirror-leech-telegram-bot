@@ -40,7 +40,6 @@ class _BotCommands:
         self.QbZipLeechCommand = 'qbzipleech7'
         self.LeechWatchCommand = 'leechwatch7'
         self.RssHelpCommand = 'rsshelp'
-        self.UsageCommand = 'usage'
         self.RebootCommand = 'reboot'
         self.ShutDownCommand = 'shutdown'
         self.MediaInfoCommand = 'mediainfo'
