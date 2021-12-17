@@ -117,7 +117,8 @@ def rss_monitor(context):
                     feed_new = f"/mirror7 {feed_urls[x]}"
                     if rss_session is None:
                         context.bot.send_message(CHAT_ID, feed_info, parse_mode='HTMl')
-                        context.bot.send_message(CHAT_ID, feed_new, parse_mode='HTMl')
+                       msg = context.bot.send_message(CHAT_ID, feed_new, parse_mode='HTMl')
+                       msg.reply_text("/mirror7")
                     else:
                         try:
                             rss_session.send_message(CHAT_ID, feed_info)
