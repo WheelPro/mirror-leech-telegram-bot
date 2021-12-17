@@ -185,6 +185,8 @@ help_string = f'''
 
 /{BotCommands.RebootCommand}: Restart the bot's dyno (Heroku only)
 
+/{BotCommands.UsageCommand}: To see Heroku Dyno Stats (Owner only).
+
 /{BotCommands.ShutDownCommand}: Turn off the bot (Heroku only)
 
 /{BotCommands.RssHelpCommand}:  Get help for RSS feeds module (Only if FEEDS = "True")
