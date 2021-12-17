@@ -43,6 +43,7 @@ class _BotCommands:
         self.UsageCommand = 'usage'
         self.RebootCommand = 'reboot'
         self.ShutDownCommand = 'shutdown'
+        self.MediaInfoCommand = 'mediainfo'
         self.LeechZipWatchCommand = 'leechzipwatch7'
 
 BotCommands = _BotCommands()
