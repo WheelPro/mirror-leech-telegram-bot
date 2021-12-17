@@ -1,3 +1,4 @@
+
 import math
 
 import requests
@@ -6,12 +7,12 @@ import heroku3
 from bot import dispatcher, HEROKU_APP_NAME, HEROKU_API_KEY
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.filters import CustomFilters
-from bot.helper.telegram_helper.message_utils import *
+from bot.helper.telegram_helper.message_utils import sendMessage
 from telegram import update
 from telegram.ext import CommandHandler
 
 
-def dyno_usage(update, context):
+def usage(update, context):
     heroku_api = "https://api.heroku.com"
     if HEROKU_API_KEY is not None and HEROKU_APP_NAME is not None:
         Heroku = heroku3.from_key(HEROKU_API_KEY)
@@ -46,8 +47,7 @@ def dyno_usage(update, context):
             minutes_remain = quota_remain / 60
             hours = math.floor(minutes_remain / 60)
             minutes = math.floor(minutes_remain % 60)
-            day = math.floor(hours / 24)
-
+            
             """App Quota."""
             Apps = result["apps"]
             for apps in Apps:
@@ -63,19 +63,17 @@ def dyno_usage(update, context):
             AppMinutes = math.floor(AppQuotaUsed % 60)
             
             sendMessage(
-                f"<b>ℹ️ Dyno Usage ℹ️</b>\n\n<code>🟢 {app.name}</code>:\n"
-                f"• <code>{AppHours}</code> <b>Hours and</b> <code>{AppMinutes}</code> <b>Minutes\n💯: {AppPercent}%</b>\n\n"
-                "<b>⚠️ Dyno Remaining ⚠️</b>\n"
-                f"• <code>{hours}</code> <b>Hours and</b> <code>{minutes}</code> <b>Minutes\n💯: {quota_percent}%</b>\n\n"
-                "<b>❌ Estimated Expired ❌</b>\n"
-                f"• <code>{day}</code> <b>Days</b>",
+                f"<b>Dyno Usage for</b> <code>{app.name}</code> :\n"
+                f"• <code>{AppHours}</code> <b>Hours and</b> <code>{AppMinutes}</code> <b>Minutes - {AppPercent}%</b>\n\n"
+                "<b>Dyno Remaining this month :</b>\n"
+                f"• <code>{hours}</code> <b>Hours and</b> <code>{minutes}</code> <b>Minutes - {quota_percent}%</b>",
                 context.bot,
                 update
             )
             return True
 
 
-DYNO_USAGE_HANDLER = CommandHandler(command=BotCommands.UsageCommand, usage, callback=dyno_usage,
-                                    filters=CustomFilters.owner_filter | CustomFilters.sudo_user, run_async=True)
+usage_handler = CommandHandler(command=BotCommands.UsageCommand, callback=usage,
+                                    filters=CustomFilters.owner_filter, run_async=True)
                                     
-dispatcher.add_handler(DYNO_USAGE_HANDLER)
+dispatcher.add_handler(usage_handler)
