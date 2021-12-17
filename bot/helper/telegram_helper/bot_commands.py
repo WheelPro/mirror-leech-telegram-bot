@@ -41,6 +41,8 @@ class _BotCommands:
         self.LeechWatchCommand = 'leechwatch7'
         self.RssHelpCommand = 'rsshelp'
         self.UsageCommand = 'usage'
+        self.RebootCommand = 'reboot'
+        self.ShutDownCommand = 'shutdown'
         self.LeechZipWatchCommand = 'leechzipwatch7'
 
 BotCommands = _BotCommands()
