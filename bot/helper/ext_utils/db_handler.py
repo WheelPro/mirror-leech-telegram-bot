@@ -2,8 +2,6 @@ import psycopg2
 from psycopg2 import Error
 from bot import AUTHORIZED_CHATS, SUDO_USERS, DB_URI, LOGGER
 
-rss_dict = {}
-
 class DbManager:
     def __init__(self):
         self.err = False
