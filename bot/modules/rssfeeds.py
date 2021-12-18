@@ -114,7 +114,7 @@ def rss_monitor(context):
                     feed_count += 1
                 for x in range(len(feed_urls)):
                     feed_info = f"<b>{feed_titles[x]}</b>\n{feed_urls[x]}"
-                    feed_new = f"/mirror7 ```{feed_urls[x]}```"
+                    feed_new = f"/mirror7 `{feed_urls[x]}`"
                     if rss_session is None:
                         context.bot.send_message(CHAT_ID, feed_info, parse_mode='HTMl')
                         context.bot.send_message(CHAT_ID, feed_new, parse_mode='HTMl')
